@@ -1,6 +1,6 @@
 {
   "name": "@loctax/nodemailer-mjml",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -31,7 +31,8 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "test": "jest --runInBand --passWithNoTests --bail",
-    "test:watch": "jest --verbose --watchAll --runInBand --passWithNoTests --bail"
+    "test:watch": "jest --verbose --watchAll --runInBand --passWithNoTests --bail",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "html-minifier": "^4.0.0",
