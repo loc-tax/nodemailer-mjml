@@ -1,12 +1,12 @@
 {
-  "name": "nodemailer-mjml",
-  "version": "1.3.1",
+  "name": "@loctax/nodemailer-mjml",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/Thomascogez/nodemailer-mjml",
+  "repository": "https://github.com/loctax/nodemailer-mjml",
   "author": "Thomascogez <thomas.cogez@gmail.com>",
   "license": "MIT",
   "devDependencies": {
