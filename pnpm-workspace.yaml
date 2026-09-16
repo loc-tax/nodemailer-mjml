@@ -1,0 +1,4 @@
+overrides:
+  # @types/mjml 4.x depends on @types/mjml-core "*", which resolves to the MJML 5 types.
+  # MJML 5 made mjml2html async, so those types break the build against mjml 4.
+  '@types/mjml-core': ^4.15.2
