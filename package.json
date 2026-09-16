@@ -8,23 +8,27 @@
   ],
   "repository": "https://github.com/loctax/nodemailer-mjml",
   "author": "Thomascogez <thomas.cogez@gmail.com>",
+  "packageManager": "yarn@3.8.7+sha256.81bf69deb72c6cfebaca4389444e034c914cc1a90ea40e4ac55a5e2a1d7063d2",
   "license": "MIT",
   "devDependencies": {
-    "@types/html-minifier": "^4.0.5",
-    "@types/jest": "^29.5.12",
+    "@types/jest": "^29.5.14",
     "@types/mjml": "^4.7.4",
-    "@types/mustache": "^4.2.5",
-    "@types/node": "^20.11.24",
-    "@types/nodemailer": "^6.4.14",
-    "@types/supertest": "^6.0.2",
+    "@types/mustache": "^4.2.6",
+    "@types/node": "^22.15.21",
+    "@types/nodemailer": "^6.4.17",
+    "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-    "eslint": "^8.57.0",
+    "cssnano": "^7.1.1",
+    "eslint": "^8.57.1",
+    "htmlnano": "^2.1.2",
     "jest": "^29.7.0",
-    "nodemailer": "^6.9.11",
-    "supertest": "^6.3.4",
-    "ts-jest": "^29.1.2",
-    "typescript": "^5.3.3"
+    "nodemailer": "^7.0.3",
+    "postcss": "^8.5.6",
+    "supertest": "^7.1.4",
+    "terser": "^5.43.1",
+    "ts-jest": "^29.3.4",
+    "typescript": "^5.8.3"
   },
   "scripts": {
     "lint": "eslint . --ext .ts",
@@ -35,11 +39,16 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "html-minifier": "^4.0.0",
     "mjml": "^4.15.3",
     "mustache": "^4.2.0"
   },
   "peerDependencies": {
+    "htmlnano": "*",
     "nodemailer": "*"
+  },
+  "peerDependenciesMeta": {
+    "htmlnano": {
+      "optional": true
+    }
   }
 }
