@@ -6,8 +6,11 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/loctax/nodemailer-mjml",
-  "author": "Thomascogez <thomas.cogez@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loc-tax/nodemailer-mjml.git"
+  },
+  "author": "Thomascogez <thomas.cogez@gmail.com> & Loctax team",
   "packageManager": "pnpm@11.25.0",
   "license": "MIT",
   "devDependencies": {
