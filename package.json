@@ -35,8 +35,8 @@
     "lint": "eslint . --ext .ts",
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "test": "jest --runInBand --passWithNoTests --bail",
-    "test:watch": "jest --verbose --watchAll --runInBand --passWithNoTests --bail",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand --passWithNoTests --bail",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --verbose --watchAll --runInBand --passWithNoTests --bail",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
