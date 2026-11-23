@@ -6,12 +6,19 @@ on:
       - "v*"
 
 permissions:
-  id-token: write # Required for OIDC
   contents: read
 
 jobs:
+  ci:
+    uses: ./.github/workflows/ci.yaml
+
   publish:
+    needs: ci
     runs-on: ubuntu-latest
+    # Only this job gets the OIDC token, the CI job runs without it.
+    permissions:
+      id-token: write # Required for OIDC
+      contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -25,6 +32,10 @@ jobs:
           node-version: "22.x"
           # This job holds the OIDC publish token, so install from the registry, not from a cache other runs can write to.
           package-manager-cache: false
+
+      # Tagging v3.1.0 while package.json says 3.0.1 would publish 3.0.1.
+      - name: Check that the tag matches package.json
+        run: test "${GITHUB_REF_NAME#v}" = "$(node -p 'require("./package.json").version')"
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm build

@@ -2,6 +2,9 @@ name: CI
 
 on:
   push:
+    # Branches only: a tag push runs these jobs through publish.yml.
+    branches:
+      - "**"
   workflow_call:
 
 permissions:

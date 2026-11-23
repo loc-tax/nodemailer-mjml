@@ -194,6 +194,7 @@ This software uses the following open source packages:
 
 Publishing happens in CI when a `v*` tag is pushed.
 The `Publish Package` workflow uses npm trusted publishing, so there is no npm token to manage.
+It runs the CI jobs first and fails if the tag does not match `version` in `package.json`.
 
 1. Bump `version` in `package.json` in the PR that ships the change (`pnpm version <major|minor|patch> --no-git-tag-version`).
    Breaking changes to the plugin options or rendered output are a major bump.
