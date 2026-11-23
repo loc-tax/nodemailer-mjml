@@ -100,4 +100,51 @@ describe("buildMjmlTemplate", () => {
     expect(mailHtmlContent).toBeDefined();
     expect(mailHtmlContent).toContain("This is a header");
   });
+
+  describe("Layout", () => {
+    it("should escape html in template data", async () => {
+      const mailHtmlContent = await buildMjmlTemplate(
+        {
+          templateFolder: join(__dirname, "../resources"),
+          templatePartialsFolder: "/include",
+        },
+        {
+          templateLayoutName: "layout/layout-single-slot",
+          templateData: {
+            templateData: "<h1>templateData</h1>",
+          },
+        }
+      );
+
+      expect(mailHtmlContent).toContain(
+        "&lt;h1&gt;templateData&lt;&#x2F;h1&gt;"
+      );
+      expect(mailHtmlContent).not.toContain("<h1>templateData</h1>");
+    });
+
+    it.each([false, true])(
+      "should not expand mustache tags inside template data (minifyHtmlOutput: %s)",
+      async (minifyHtmlOutput) => {
+        const mailHtmlContent = await buildMjmlTemplate(
+          {
+            templateFolder: join(__dirname, "../resources"),
+            templatePartialsFolder: "/include",
+            minifyHtmlOutput,
+          },
+          {
+            templateLayoutName: "layout/layout-single-slot",
+            templateData: {
+              templateData: "{{{secret}}} {{secret}}",
+              secret: "<b>secret value</b>",
+            },
+          }
+        );
+
+        expect(mailHtmlContent).toContain(
+          "&#123;&#123;&#123;secret&#125;&#125;&#125; &#123;&#123;secret&#125;&#125;"
+        );
+        expect(mailHtmlContent).not.toContain("secret value");
+      }
+    );
+  });
 });

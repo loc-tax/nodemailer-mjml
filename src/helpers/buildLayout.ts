@@ -1,7 +1,15 @@
 import { access, readFile } from "fs/promises";
-import { render } from "mustache";
+import { escape, render } from "mustache";
 import { dirname, join } from "path";
 import { BuildLayoutTemplateOptions } from "../types/BuildLayoutTemplateOptions";
+
+const BRACE_ENTITIES: Record<string, string> = { "{": "&#123;", "}": "&#125;" };
+
+// buildMjmlTemplate renders the compiled HTML with Mustache a second time, to fill in the tags of the included slots.
+// Mustache's own escaping leaves braces alone, so a value like "{{{other}}}" would pass through here and expand unescaped in that second render.
+// As entities the braces still display as braces, but Mustache no longer reads them as tags.
+const escapeTemplateData = (value: unknown) =>
+  escape(value).replace(/[{}]/g, (brace) => BRACE_ENTITIES[brace]);
 
 export const buildLayout = async (
   options: BuildLayoutTemplateOptions,
@@ -78,6 +86,7 @@ export const buildLayout = async (
   return render(
     layoutFileContent,
     { ...layoutSlotsContent, ...templateData },
-    {}
+    {},
+    { escape: escapeTemplateData }
   );
 };

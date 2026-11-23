@@ -159,4 +159,34 @@ describe("Build layout", () => {
     expect(buildedLayout).not.toContain(`{{{ slots:customContent }}}`);
     expect(buildedLayout).not.toContain(`{{{ slots:customFooter }}}`);
   });
+
+  it("should escape html in template data", async () => {
+    const buildedLayout = await buildLayout(
+      {
+        templateFolder: join(__dirname, "../resources"),
+        templateLayoutName: "layout/layout-single-slot",
+        templateLayoutSlots: {},
+        templatePartialsFolder: "/include",
+      },
+      { templateData: "<h1>templateData</h1>" }
+    );
+
+    expect(buildedLayout).toContain("&lt;h1&gt;templateData&lt;&#x2F;h1&gt;");
+    expect(buildedLayout).not.toContain("<h1>templateData</h1>");
+  });
+
+  it("should escape braces in template data so a later render cannot expand them", async () => {
+    const buildedLayout = await buildLayout(
+      {
+        templateFolder: join(__dirname, "../resources"),
+        templateLayoutName: "layout/layout-single-slot",
+        templateLayoutSlots: {},
+        templatePartialsFolder: "/include",
+      },
+      { templateData: "{{{secret}}}" }
+    );
+
+    expect(buildedLayout).toContain("&#123;&#123;&#123;secret&#125;&#125;&#125;");
+    expect(buildedLayout).not.toContain("{{{secret}}}");
+  });
 });
