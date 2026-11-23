@@ -1,6 +1,7 @@
 > [!NOTE]
 > This is the Loctax fork of [Thomascogez/nodemailer-mjml](https://github.com/Thomascogez/nodemailer-mjml), published as [`@loctax/nodemailer-mjml`](https://www.npmjs.com/package/@loctax/nodemailer-mjml).
 > It HTML-escapes `templateData` in layouts by default, so use `{{{value}}}` for raw values and `{{{ slots:header }}}` for slots.
+> A raw `{{{value}}}` in a layout is rendered twice, so Mustache tags inside the value are expanded. Only use it for values you trust.
 > See [Releasing](#releasing) and [Syncing with upstream](#syncing-with-upstream) for how the fork is maintained.
 
 > [!WARNING]  
