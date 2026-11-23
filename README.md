@@ -197,11 +197,11 @@ The `Publish Package` workflow uses npm trusted publishing, so there is no npm t
 
 1. Bump `version` in `package.json` in the PR that ships the change (`pnpm version <major|minor|patch> --no-git-tag-version`).
    Breaking changes to the plugin options or rendered output are a major bump.
-2. Merge the PR into `master`.
+2. Merge the PR into `release`, the default branch.
 3. Tag the merge commit with a signed tag and push it:
 
    ```sh
-   git switch master && git pull
+   git switch release && git pull
    git tag -s v3.0.0 -m v3.0.0
    git push origin v3.0.0
    ```
@@ -213,7 +213,7 @@ The `Publish Package` workflow uses npm trusted publishing, so there is no npm t
 ```sh
 git remote add upstream https://github.com/Thomascogez/nodemailer-mjml.git
 git fetch upstream
-git switch -c sync-upstream origin/master
+git switch -c sync-upstream origin/release
 git merge upstream/master
 ```
 
